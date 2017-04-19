@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql://localhost:3306/db_eindwerk</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">root</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="show_sql">true</property>
+    <property name="format_sql">true</property>
+    <property name="hbm2dll.auto">create</property>
+    <mapping resource="be/miras/programs/frederik/dbo/DbMateriaal.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbMateriaal"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbTypeMateriaal.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbTypeMateriaal"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbWerkgever.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbWerkgever"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbPersoon.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbPersoon"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbGebruiker.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbGebruiker"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbPersoonAdres.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbPersoonAdres"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbAdres.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbAdres"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbGemeente.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbGemeente"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbStraat.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbStraat"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbWerknemer.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbWerknemer"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbKlant.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbKlant"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbKlantAdres.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbKlantAdres"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbOpdracht.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbOpdracht"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbBevoegdheid.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbBevoegdheid"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbOpdrachtMateriaal.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbOpdrachtMateriaal"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbOpdrachtTaak.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbOpdrachtTaak"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbStatus.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbStatus"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbTaak.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbTaak"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbVooruitgang.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbVooruitgang"/>
+    <mapping resource="be/miras/programs/frederik/dbo/DbWerknemerOpdrachtTaak.hbm.xml"/>
+    <mapping class="be.miras.programs.frederik.dbo.DbWerknemerOpdrachtTaak"/>
+  </session-factory>
+</hibernate-configuration>
