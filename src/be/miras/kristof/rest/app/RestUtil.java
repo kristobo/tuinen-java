@@ -6,7 +6,9 @@
 package be.miras.kristof.rest.app;
 
 import be.miras.programs.frederik.dao.DbGebruikerDao;
+import be.miras.programs.frederik.dao.DbWerknemerDao;
 import be.miras.programs.frederik.dbo.DbGebruiker;
+import be.miras.programs.frederik.dbo.DbWerknemer;
 import java.util.StringTokenizer;
 import org.glassfish.jersey.internal.util.Base64;
 
@@ -57,6 +59,17 @@ public class RestUtil {
 
             int id = gebruiker.getId();
 
+            return id;
+    }
+    
+     public static int getIdWerknemerFromToken(String usernameAndPassword){
+            
+            int userId = getIdGebruikerFromToken(usernameAndPassword);
+            
+            // Get wernemer from db
+            DbWerknemerDao wnDao = new DbWerknemerDao();
+            int id = wnDao.getWerknemerIdByUser(userId);
+           
             return id;
     }
     

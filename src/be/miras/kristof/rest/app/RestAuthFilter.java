@@ -29,8 +29,7 @@ public class RestAuthFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         
         Response ACCESS_DENIED = Response.status(Response.Status.UNAUTHORIZED).entity("You cannot access this resource").build();
-        //Response ACCESS_FORBIDDEN = Response.status(Response.Status.FORBIDDEN).entity("Access blocked for all users").build();
-   
+        
         // Get auth header
         List<String> authHeader = requestContext.getHeaders().get(RestUtil.AUTHORIZATION_HEADER_KEY);
 

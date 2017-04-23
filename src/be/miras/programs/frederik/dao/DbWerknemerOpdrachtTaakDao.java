@@ -233,6 +233,45 @@ public class DbWerknemerOpdrachtTaakDao implements ICRUD {
 		
 		return lijst;
 	}
+        
+        
+        /**
+         * Kristof Bourgeois
+         * @return 
+         */
+        
+	public List<Object> getAllTaskByUser(int userId) {
+		List<Object> lijst = new ArrayList<Object>();
+		String query = "SELECT t.ID, t.naam as tnaam, o.klantID "
+                        + "FROM werknemer_opdracht_taak as wot "
+                        + "INNER JOIN taak as t on "
+                        + "wot.Opdracht_TaakTaakID = t.ID "
+                        + "INNER JOIN opdracht as o on "
+                        + "wot.Opdracht_TaakOpdrachtID = o.ID "
+                        + "where wot.WerknemerID = :userId";
+                     
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.getTransaction();
+			session.beginTransaction();
+			Query q = session.createSQLQuery(query);
+                        q.setParameter("userId", userId);
+			lijst = q.list();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		List<Object> objectLijst = new ArrayList<Object>(lijst);
+		return objectLijst;
+	}
 
 
 }
