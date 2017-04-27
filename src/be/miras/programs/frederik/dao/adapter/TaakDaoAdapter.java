@@ -14,6 +14,7 @@ import be.miras.programs.frederik.dbo.DbOpdrachtTaak;
 import be.miras.programs.frederik.dbo.DbStatus;
 import be.miras.programs.frederik.dbo.DbTaak;
 import be.miras.programs.frederik.dbo.DbVooruitgang;
+import be.miras.programs.frederik.dbo.DbWerknemerOpdrachtTaak;
 import be.miras.programs.frederik.model.Taak;
 
 public class TaakDaoAdapter implements ICRUD {
@@ -62,9 +63,47 @@ public class TaakDaoAdapter implements ICRUD {
 	}
 
 	@Override
-	public Object lees(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Taak lees(int id) {
+            
+            
+                DbOpdrachtTaakDao dbOpdrachtTaakDao = new DbOpdrachtTaakDao();
+                DbOpdrachtTaak dbOpdrachtTaak = dbOpdrachtTaakDao.getByTaskId(id);
+                
+                int opdrachtId = dbOpdrachtTaak.getOpdrachtId();
+   
+                DbTaakDao dbTaakDao = new DbTaakDao();
+                DbVooruitgangDao dbVooruitgangDao = new DbVooruitgangDao();
+                DbStatusDao dbStatusDao = new DbStatusDao();
+                Taak taak = new Taak();
+
+
+                DbTaak dbTaak = (DbTaak) dbTaakDao.lees(id);
+                int dbVooruitgangId = dbOpdrachtTaak.getVooruitgangId();
+                DbVooruitgang dbVooruitgang = (DbVooruitgang) dbVooruitgangDao.lees(dbVooruitgangId);
+                int statusId = dbVooruitgang.getStatusId();
+                DbStatus dbStatus = (DbStatus) dbStatusDao.lees(statusId);
+
+                int taakId = dbTaak.getId();
+                String taakNaam = dbTaak.getNaam();
+                int visible = dbTaak.getVisible();
+                boolean isVisible = true;
+                if (visible == 0){
+                        isVisible = false;
+                }
+                String opmerking = dbOpdrachtTaak.getOpmerking();
+                int vooruitgangPercentage = dbVooruitgang.getPercentage();
+                String status = dbStatus.getNaam();
+
+
+                taak.setId(taakId);
+                taak.setOpdrachtId(opdrachtId);
+                taak.setTaakNaam(taakNaam);
+                taak.setVisible(isVisible);
+                taak.setOpmerking(opmerking);
+                taak.setVooruitgangPercentage(vooruitgangPercentage);
+                taak.setStatus(status);
+		
+		return taak;
 	}
 
 	@Override

@@ -13,6 +13,7 @@ import be.miras.programs.frederik.dao.DbWerknemerOpdrachtTaakDao;
 import be.miras.programs.frederik.dao.adapter.TaakDaoAdapter;
 import be.miras.programs.frederik.dbo.DbGebruiker;
 import be.miras.programs.frederik.dbo.DbTaak;
+import be.miras.programs.frederik.model.Taak;
 import com.google.gson.Gson;
 import java.util.Iterator;
 import java.util.List;
@@ -57,8 +58,17 @@ public class TaskService {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response getTaskById(@PathParam("id") int id) {
-        String output = "Hello! "+id;
-        return Response.status(200).entity(output).build();
+        String tasks = "Hello! "+id;
+        
+        TaakDaoAdapter tda = new TaakDaoAdapter();
+        Taak task = tda.lees(id);
+        
+        Gson gson = new Gson();
+        // convert your list to json
+        String taskJson = gson.toJson(task);
+        
+        
+        return Response.status(200).entity(taskJson).build();
     }
 
 }

@@ -297,5 +297,36 @@ public class DbOpdrachtTaakDao implements ICRUD {
 		}
 		return lijst;
 	}
+        
+        /**
+         * Kristof Bourgeois
+         * @return 
+         */
+	public DbOpdrachtTaak getByTaskId(int taakId) {
+		List<DbOpdrachtTaak> lijst = new ArrayList<DbOpdrachtTaak>();
+		String query = "FROM DbOpdrachtTaak where taakId = :taakId"; 
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.getTransaction();
+			session.beginTransaction();
+			Query q = session.createQuery(query);
+                        q.setParameter("taakId", taakId);
+			lijst = q.list();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		DbOpdrachtTaak dbOt = lijst.get(0);
+                
+		return dbOt;
+	}
 
 }

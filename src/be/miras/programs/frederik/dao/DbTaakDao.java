@@ -37,7 +37,7 @@ public class DbTaakDao implements ICRUD {
 	}
 
 	@Override
-	public Object lees(int id) {
+	public DbTaak lees(int id) {
 		DbTaak taak = new DbTaak();
 		Session session = HibernateUtil.openSession();
 		Transaction transaction = null;
