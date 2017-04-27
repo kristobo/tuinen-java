@@ -29,17 +29,24 @@ public class LoginService {
     public Response authenticateUser(@FormParam("username") String username,
                                      @FormParam("password") String password) {
         
-        if(RestUtil.isUserAllowed(username, password)){
+        if(RestUtil.isExistingUser(username, password)){
+            
+            // Check if correct rol
+            if (RestUtil.hasWerknemerRol(username, password)){
+                 
+                // Issue a token for the user
+                String token = RestUtil.generateToken(username, password);
 
-            // Issue a token for the user
-            String token = RestUtil.generateToken(username, password);
+                // Return the token on the response
+                return Response.ok(token).build();
 
-            // Return the token on the response
-            return Response.ok(token).build();
-
+            }
+            
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde rol").build();
+           
         }
 
-        return Response.status(Response.Status.UNAUTHORIZED).build();
+        return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde gebruikersnaam of passwoord").build();
     }
     
 }

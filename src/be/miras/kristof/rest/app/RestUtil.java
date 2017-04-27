@@ -23,7 +23,7 @@ public class RestUtil {
     public static final String AUTHENTICATION_LOGIN_URL = "login";
 
 
-    public static boolean isUserAllowed(String username, String password){
+    public static boolean isExistingUser(String username, String password){
 
             boolean isAllowed = false;
 
@@ -37,14 +37,16 @@ public class RestUtil {
             }
 
             String pas = userDao.leesWachtwoord(gebruiker.getId());
-
-            if (pas.equals(password)){
+            
+            if (pas !=null && pas.equals(password)){
                 isAllowed = true;
             }
             
 
             return isAllowed;
     }
+    
+    
     
     public static int getIdGebruikerFromToken(String usernameAndPassword){
             
@@ -62,7 +64,7 @@ public class RestUtil {
             return id;
     }
     
-     public static int getIdWerknemerFromToken(String usernameAndPassword){
+    public static int getIdWerknemerFromToken(String usernameAndPassword){
             
             int userId = getIdGebruikerFromToken(usernameAndPassword);
             
@@ -71,6 +73,21 @@ public class RestUtil {
             int id = wnDao.getWerknemerIdByUser(userId);
            
             return id;
+    }
+    
+    
+    public static boolean hasWerknemerRol(String username, String password){
+            
+            // Get user from db
+            DbGebruikerDao userDao = new DbGebruikerDao();
+            DbGebruiker gebruiker = userDao.getUserByName(username);
+            int id = gebruiker.getBevoegdheidId();
+            
+            if(id == 2){
+                return true;
+            }
+            
+            return false;
     }
     
     

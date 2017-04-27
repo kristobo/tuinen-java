@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import be.miras.programs.frederik.dbo.DbWerknemerOpdrachtTaak;
+import org.hibernate.transform.AliasToEntityMapResultTransformer;
 
 
 public class DbWerknemerOpdrachtTaakDao implements ICRUD {
@@ -242,7 +243,7 @@ public class DbWerknemerOpdrachtTaakDao implements ICRUD {
         
 	public List<Object> getAllTaskByUser(int userId) {
 		List<Object> lijst = new ArrayList<Object>();
-		String query = "SELECT t.ID, t.naam as tnaam, o.klantID "
+		String query = "SELECT t.ID as id, t.naam as title, o.klantID as klantId "
                         + "FROM werknemer_opdracht_taak as wot "
                         + "INNER JOIN taak as t on "
                         + "wot.Opdracht_TaakTaakID = t.ID "
@@ -257,6 +258,7 @@ public class DbWerknemerOpdrachtTaakDao implements ICRUD {
 			transaction = session.getTransaction();
 			session.beginTransaction();
 			Query q = session.createSQLQuery(query);
+                        q.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
                         q.setParameter("userId", userId);
 			lijst = q.list();
 			transaction.commit();

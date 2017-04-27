@@ -36,13 +36,9 @@ public class TaskService {
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllTasksByUser(@HeaderParam("X-Authentication-decrypted") String auth) {
-        
-        Integer id = RestUtil.getIdWerknemerFromToken(auth);
-        
-        if (id == null){
-            return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde rol").build();
-        }
-        
+      
+        int id = RestUtil.getIdWerknemerFromToken(auth);
+
         //Get all tasks by werknemer
         DbWerknemerOpdrachtTaakDao dbWOTdao = new DbWerknemerOpdrachtTaakDao();
         List<Object> taskList = dbWOTdao.getAllTaskByUser(id);
@@ -61,7 +57,7 @@ public class TaskService {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Response getTaskById(@PathParam("id") int id) {
-        String output = "Hello!"+id;
+        String output = "Hello! "+id;
         return Response.status(200).entity(output).build();
     }
 

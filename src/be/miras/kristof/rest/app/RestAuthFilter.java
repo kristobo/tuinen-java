@@ -28,7 +28,7 @@ public class RestAuthFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         
-        Response ACCESS_DENIED = Response.status(Response.Status.UNAUTHORIZED).entity("You cannot access this resource").build();
+        Response ACCESS_DENIED = Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde gebruikersnaam of passwoord").build();
         
         // Get auth header
         List<String> authHeader = requestContext.getHeaders().get(RestUtil.AUTHORIZATION_HEADER_KEY);
@@ -50,7 +50,7 @@ public class RestAuthFilter implements ContainerRequestFilter {
         String username = tokenizer.nextToken();
         String password = tokenizer.nextToken();
 
-        if(RestUtil.isUserAllowed(username,password)){
+        if(RestUtil.isExistingUser(username,password)){
             //Add id in header to pass to endpoint
             requestContext.getHeaders().add("X-Authentication-decrypted", usernameAndPassword);
             
