@@ -289,4 +289,41 @@ public class DbGebruikerDao implements ICRUD {
 		return gebruiker;
 	}
         
+        
+        /**
+         * Kristof Bourgeois
+         * Get user by name
+         * @param name
+         * @return 
+         */
+	public Integer getPersoonIdByUserId(int userId) {
+                int id = 0; 
+		DbGebruiker gebruiker = new DbGebruiker();
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = null;
+		String query = "SELECT PersoonID FROM gebruiker where id = :userId";
+		List<Integer> lijst = new ArrayList<Integer>();
+		try {
+			transaction = session.getTransaction();
+			session.beginTransaction();
+			Query q = session.createSQLQuery(query);
+			q.setParameter("userId", userId);
+			lijst = q.list();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+
+		} finally {
+			session.close();
+		}
+		if (!lijst.isEmpty()) {
+			id = lijst.get(0);
+		}
+		
+		return id;
+	}
+        
 }

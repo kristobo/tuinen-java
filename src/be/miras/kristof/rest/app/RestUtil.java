@@ -6,6 +6,7 @@
 package be.miras.kristof.rest.app;
 
 import be.miras.programs.frederik.dao.DbGebruikerDao;
+import be.miras.programs.frederik.dao.DbPersoonDao;
 import be.miras.programs.frederik.dao.DbWerknemerDao;
 import be.miras.programs.frederik.dbo.DbGebruiker;
 import be.miras.programs.frederik.dbo.DbWerknemer;
@@ -48,7 +49,7 @@ public class RestUtil {
     
     
     
-    public static int getIdGebruikerFromToken(String usernameAndPassword){
+    public static int getGebruikerIdFromToken(String usernameAndPassword){
             
             //Split username and password tokens
             StringTokenizer tokenizer = new StringTokenizer(usernameAndPassword, ":");
@@ -64,13 +65,23 @@ public class RestUtil {
             return id;
     }
     
+    public static int getPersoonIdFromGebruikerId(int userId){
+            
+            // Get PersoonID from UserId.
+            DbGebruikerDao userDao = new DbGebruikerDao();
+            int id = userDao.getPersoonIdByUserId(userId);
+
+            return id;
+    }
+    
     public static int getIdWerknemerFromToken(String usernameAndPassword){
             
-            int userId = getIdGebruikerFromToken(usernameAndPassword);
+            int userId = getGebruikerIdFromToken(usernameAndPassword);
+            int persoonId = getPersoonIdFromGebruikerId(userId);
             
             // Get wernemer from db
             DbWerknemerDao wnDao = new DbWerknemerDao();
-            int id = wnDao.getWerknemerIdByUser(userId);
+            int id = wnDao.getWerknemerIdByPersoon(persoonId);
            
             return id;
     }

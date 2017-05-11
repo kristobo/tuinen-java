@@ -300,7 +300,7 @@ public class DbOpdrachtTaakDao implements ICRUD {
         
         /**
          * Kristof Bourgeois
-         * @return 
+         * @return DbOpdrachtTaak
          */
 	public DbOpdrachtTaak getByTaskId(int taakId) {
 		List<DbOpdrachtTaak> lijst = new ArrayList<DbOpdrachtTaak>();

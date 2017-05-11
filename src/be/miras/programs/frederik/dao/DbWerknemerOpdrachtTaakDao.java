@@ -238,19 +238,25 @@ public class DbWerknemerOpdrachtTaakDao implements ICRUD {
         
         /**
          * Kristof Bourgeois
-         * @return 
+         * @return List
          */
         
-	public List<Object> getAllTaskByUser(int userId) {
+	public List<Object> getAllCurrentTaskByUser(int userId) {
 		List<Object> lijst = new ArrayList<Object>();
-		String query = "SELECT t.ID as id, t.naam as title, o.klantID as klantId "
-                        + "FROM werknemer_opdracht_taak as wot "
-                        + "INNER JOIN taak as t on "
-                        + "wot.Opdracht_TaakTaakID = t.ID "
+                      
+                String query = "SELECT DISTINCT ot.taakID as id, t.naam as taakNaam, o.KlantID as klantId, v.Percentage as vooruitgangPercentage "
+                        + "FROM opdracht_taak as ot "
                         + "INNER JOIN opdracht as o on "
-                        + "wot.Opdracht_TaakOpdrachtID = o.ID "
-                        + "where wot.WerknemerID = :userId";
-                     
+                        + "ot.OpdrachtID = o.ID "
+                        + "INNER JOIN taak as t on "
+                        + "ot.TaakID = t.ID "
+                        + "INNER JOIN werknemer_opdracht_taak as wot on "
+                        + "ot.TaakID = wot.Opdracht_TaakTaakID "
+                        + "LEFT OUTER JOIN vooruitgang as v on "
+                        + "ot.VooruitgangID = v.ID "
+                        + "WHERE wot.WerknemerID = :userId ";
+                        //+ "AND NOW() BETWEEN o.startdatum AND o.einddatum";
+ 
 		Session session = HibernateUtil.openSession();
 		Transaction transaction = null;
 

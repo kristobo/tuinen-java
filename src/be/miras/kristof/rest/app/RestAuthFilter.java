@@ -59,8 +59,6 @@ public class RestAuthFilter implements ContainerRequestFilter {
         
         requestContext.abortWith(ACCESS_DENIED);
 
-       
-        
     }
     
 }

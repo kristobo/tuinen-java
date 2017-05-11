@@ -197,17 +197,17 @@ public class DbWerknemerDao implements ICRUD {
          * @param userId
          * @return 
          */
-        public Integer getWerknemerIdByUser(int userId) {
+        public Integer getWerknemerIdByPersoon(int persoonId) {
 		Session session = HibernateUtil.openSession();
                 int id = 0;
 		Transaction transaction = null;
-		String query = "SELECT id FROM DbWerknemer where PersoonId = :userId";
+		String query = "SELECT id FROM DbWerknemer where PersoonId = :persoonId";
 		List<Integer> lijst = new ArrayList<Integer>();
 		try {
 			transaction = session.getTransaction();
 			session.beginTransaction();
 			Query q = session.createQuery(query);
-			q.setParameter("userId", userId);
+			q.setParameter("persoonId", persoonId);
 			lijst = q.list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
