@@ -7,20 +7,20 @@ package be.miras.kristof.rest.services;
 
 import be.miras.kristof.rest.app.RestUtil;
 import be.miras.kristof.rest.app.Secured;
-import be.miras.programs.frederik.dao.DbGebruikerDao;
 import be.miras.programs.frederik.dao.DbOpdrachtTaakDao;
-import be.miras.programs.frederik.dao.DbTaakDao;
 import be.miras.programs.frederik.dao.DbVooruitgangDao;
 import be.miras.programs.frederik.dao.DbWerknemerOpdrachtTaakDao;
+import be.miras.programs.frederik.dbo.DbWerknemerOpdrachtTaak;
 import be.miras.programs.frederik.dao.adapter.TaakDaoAdapter;
-import be.miras.programs.frederik.dbo.DbGebruiker;
 import be.miras.programs.frederik.dbo.DbOpdrachtTaak;
-import be.miras.programs.frederik.dbo.DbTaak;
 import be.miras.programs.frederik.dbo.DbVooruitgang;
 import be.miras.programs.frederik.model.Taak;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import java.util.Iterator;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -31,7 +31,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.simple.JSONObject;
+import org.glassfish.jersey.internal.util.Base64;
 
 /**
  *
@@ -73,7 +73,6 @@ public class TaskService {
         TaakDaoAdapter tda = new TaakDaoAdapter();
         Taak task = tda.lees(id);
         
-        
         Gson gson = new Gson();
         // convert your list to json
         String taskJson = gson.toJson(task);
@@ -114,8 +113,54 @@ public class TaskService {
         vg.setPercentage(vooruitgang);
         vgd.wijzig(vg);
         
-        
         String output = gson.toJson("POST: Taakstatus gewijzigd (taakId=" + taskId + ")");
+        return Response.status(200).entity(output).build();
+    }
+    
+    @POST
+    @Secured
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/track")
+    public Response logTaskRegistration(String obj, @HeaderParam("X-Authentication-decrypted") String token) throws ParseException {
+        
+        // Get user info front header
+        int werknermerId = RestUtil.getIdWerknemerFromToken(token);
+        
+        // Get Track Info from json.
+        Gson gson = new Gson();
+        JsonObject track = gson.fromJson(obj, JsonObject.class); 
+        System.out.print(track);
+        
+        // Get fields from json
+        int taskId = track.get("taskId").getAsInt();
+        int opdrachtId = track.get("opdrachtId").getAsInt();
+        int startTime_int = track.get("startTime").getAsInt();
+        int endTime_int = track.get("endTime").getAsInt();
+        
+        // Convert date to correct format
+        Date startTime = new Date(startTime_int*1000L);
+        Date endTime = new Date(endTime_int*1000L);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String startTime_s = sdf.format(startTime);
+        String endTime_s = sdf.format(endTime);
+   
+        startTime = sdf.parse(startTime_s);
+        endTime = sdf.parse(endTime_s);
+
+        // Create object
+        DbWerknemerOpdrachtTaak dbWOT = new DbWerknemerOpdrachtTaak();
+        dbWOT.setWerknemerId(werknermerId);
+        dbWOT.setBeginuur(startTime);
+        dbWOT.setEinduur(endTime);
+        dbWOT.setOpdrachtTaakOpdrachtId(opdrachtId);
+        dbWOT.setOpdrachtTaakTaakId(taskId);
+        
+        // Save track info
+        DbWerknemerOpdrachtTaakDao dbWOTd = new DbWerknemerOpdrachtTaakDao();
+        dbWOTd.voegToe(dbWOT);
+     
+        String output = gson.toJson("POST: tijdregistratie toegevoegd ");
         return Response.status(200).entity(output).build();
     }
 
