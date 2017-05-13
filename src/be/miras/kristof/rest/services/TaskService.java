@@ -84,8 +84,8 @@ public class TaskService {
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/status")
-    public Response setStatus(String obj) {
+    @Path("/progress")
+    public Response setProgress(String obj) {
         
         // Get Task Info from json.
         Gson gson = new Gson();
