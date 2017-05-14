@@ -195,4 +195,33 @@ public class DbTypeMateriaalDao implements ICRUD {
 		}
 		return id;
 	}
+        
+        public String leesNaam(int id) {
+		String naam = "";
+		Session session = HibernateUtil.openSession();
+		Transaction transaction = null;
+		String query = "SELECT naam FROM DbTypeMateriaal where id = :id";
+		List<String> lijst = new ArrayList<String>();
+		try {
+			transaction = session.getTransaction();
+			session.beginTransaction();
+			Query q = session.createQuery(query);
+			q.setParameter("id", id);
+			lijst = q.list();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+
+		} finally {
+			session.close();
+		}
+		if (!lijst.isEmpty()) {
+			naam = lijst.get(0);
+		}
+		
+		return naam;
+	}
 }

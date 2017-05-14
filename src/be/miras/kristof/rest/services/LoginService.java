@@ -23,6 +23,12 @@ import javax.ws.rs.core.Response;
 
 public class LoginService {
     
+    /**
+     * Validate login and return token.
+     * @param username
+     * @param password
+     * @return 
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)

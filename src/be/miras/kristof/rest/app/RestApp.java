@@ -7,7 +7,7 @@ package be.miras.kristof.rest.app;
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
- *
+ * Create jersey.
  * @author kbo
  */
 public class RestApp extends ResourceConfig   {

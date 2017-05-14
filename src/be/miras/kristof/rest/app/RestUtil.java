@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
 import org.glassfish.jersey.internal.util.Base64;
 
 /**
- *
+ * Utils
  * @author kbo
  */
 public class RestUtil {

@@ -163,8 +163,7 @@ public class MateriaalDaoAdapter implements ICRUD {
 			Materiaal materiaal = new Materiaal();
 
 			DbOpdrachtMateriaal om = it.next();
-
-			dbMateriaal = (DbMateriaal) dbMateriaalDao.lees(om.getId());
+                        dbMateriaal = (DbMateriaal) dbMateriaalDao.lees(om.getMateriaalId());
 
 			materiaal.setId(dbMateriaal.getId());
 			materiaal.setNaam(dbMateriaal.getNaam());

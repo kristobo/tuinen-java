@@ -40,6 +40,11 @@ import org.glassfish.jersey.internal.util.Base64;
 @Path("/task")
 public class TaskService {
     
+    /**
+     * Get all tasks by user
+     * @param auth
+     * @return 
+     */
     @Path("/all")
     @GET
     @Secured
@@ -63,7 +68,11 @@ public class TaskService {
         return Response.status(Response.Status.NOT_FOUND).entity("Geen taken toegekend").build();
     }
     
-    
+    /**
+     * get task by id
+     * @param id
+     * @return 
+     */
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
@@ -80,6 +89,11 @@ public class TaskService {
         return Response.status(200).entity(taskJson).build();
     }
     
+    /**
+     * Set task progress.
+     * @param obj
+     * @return 
+     */
     @POST
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
@@ -117,6 +131,13 @@ public class TaskService {
         return Response.status(200).entity(output).build();
     }
     
+    /**
+     * Add recording info to task.
+     * @param obj
+     * @param token
+     * @return
+     * @throws ParseException 
+     */
     @POST
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
@@ -130,7 +151,6 @@ public class TaskService {
         // Get Track Info from json.
         Gson gson = new Gson();
         JsonObject track = gson.fromJson(obj, JsonObject.class); 
-        System.out.print(track);
         
         // Get fields from json
         int taskId = track.get("taskId").getAsInt();

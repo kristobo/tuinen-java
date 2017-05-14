@@ -25,6 +25,10 @@ import javax.ws.rs.core.Response;
 @Path("/customer")
 public class CustomerService {
     
+    /**
+     * Get all customers.
+     * @return 
+     */
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)
@@ -43,6 +47,11 @@ public class CustomerService {
         return Response.status(200).entity(klantListJson).build();
     }
     
+    /**
+     * Get customer by id.
+     * @param id
+     * @return 
+     */
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)

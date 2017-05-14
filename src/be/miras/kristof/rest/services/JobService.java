@@ -34,7 +34,11 @@ import javax.ws.rs.core.Response;
 @Path("/job")
 public class JobService {
     
-    
+    /**
+     * Get job by id.
+     * @param id
+     * @return 
+     */
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)

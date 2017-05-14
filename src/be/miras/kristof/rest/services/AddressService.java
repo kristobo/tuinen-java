@@ -37,7 +37,11 @@ import javax.ws.rs.core.Response;
 @Path("/address")
 public class AddressService {
     
-    
+    /**
+     * Get Address by id.
+     * @param id
+     * @return 
+     */
     @GET
     @Secured
     @Produces(MediaType.APPLICATION_JSON)

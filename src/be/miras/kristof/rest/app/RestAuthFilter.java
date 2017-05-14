@@ -18,6 +18,7 @@ import org.glassfish.jersey.internal.util.Base64;
 
 /**
  *
+ * Filter all requests with @secured tag and check if user has access.
  * @author kbo
  */
 @Secured
