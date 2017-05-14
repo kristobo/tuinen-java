@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -107,6 +108,18 @@ public class MaterialService {
         }
         
        return Response.status(Response.Status.NOT_FOUND).entity("Geen materialen toegekend").build();
+    }
+    
+    /**
+     * Delete material from job
+     * @param id
+     * @return 
+     */
+    @DELETE
+    @Path("/{id}")
+    public Response deleteJobMaterial(final @PathParam("id") String id) {
+            
+            return Response.ok().build();
     }
     
 
