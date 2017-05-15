@@ -19,6 +19,8 @@ import be.miras.programs.frederik.model.Personeel;
 import be.miras.programs.frederik.util.GoogleApis;
 
 /**
+ * @author Frederik Vanden Bussche
+ * 
  * Servlet implementation class PersoneelToonDetailServlet
  */
 @WebServlet("/PersoneelToonDetailServlet")
@@ -55,7 +57,7 @@ public class PersoneelToonDetailServlet extends HttpServlet {
 			 * 'PersoneelDetail.jsp'. Daarom stellen we nu de voornaam van het
 			 * personeelslid tijdelijk in.
 			 */
-			aanspreeknaam = "een nieuw personeelslid";
+			aanspreeknaam = "";
 			buttonNaam = "Voeg toe";
 
 		} else {
@@ -65,7 +67,7 @@ public class PersoneelToonDetailServlet extends HttpServlet {
 
 			// de lijst met personeel uit de session halen
 			HttpSession session = request.getSession();
-			ArrayList<Personeel> lijst = (ArrayList<Personeel>) session.getAttribute("lijst");
+			ArrayList<Personeel> lijst = (ArrayList<Personeel>) session.getAttribute("personeelLijst");
 
 			// het personeelslid met de corresponderende id opzoeken.
 			Iterator<Personeel> it = lijst.iterator();
@@ -107,14 +109,15 @@ public class PersoneelToonDetailServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		session.setAttribute("id", id);
-
-		request.setAttribute("aanspreeknaam", aanspreeknaam);
-		request.setAttribute("buttonNaam", buttonNaam);
+		
+		session.setAttribute("aanspreeknaam", aanspreeknaam);
+		session.setAttribute("buttonNaam", buttonNaam);
 
 		session.setAttribute("personeelslid", personeelslid);
 
 		RequestDispatcher view = this.getServletContext().getRequestDispatcher("/PersoneelDetail.jsp");
 		view.forward(request, response);
 	}
+
 
 }

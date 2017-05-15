@@ -17,7 +17,7 @@
         - cleanup
 
         -->
-<project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="Tuinbouw_v2-impl">
+<project xmlns:webproject1="http://www.netbeans.org/ns/web-project/1" xmlns:webproject2="http://www.netbeans.org/ns/web-project/2" xmlns:webproject3="http://www.netbeans.org/ns/web-project/3" basedir=".." default="default" name="Tuinen-impl">
     <import file="rest-build.xml"/>
     <import file="ant-deploy.xml"/>
     <fail message="Please build using Ant 1.7.1 or higher.">
@@ -461,7 +461,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
                 </condition>
                 <union id="test.set"/>
                 <taskdef classname="org.testng.TestNGAntTask" classpath="${run.test.classpath}" name="testng"/>
-                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="Tuinbouw_v2" testname="TestNG tests" workingDir="${basedir}">
+                <testng classfilesetref="test.set" failureProperty="tests.failed" listeners="org.testng.reporters.VerboseReporter" methods="${testng.methods.arg}" mode="${testng.mode}" outputdir="${build.test.results.dir}" suitename="Tuinen" testname="TestNG tests" workingDir="${basedir}">
                     <xmlfileset dir="${build.test.classes.dir}" includes="@{testincludes}"/>
                     <propertyset>
                         <propertyref prefix="test-sys-prop."/>
@@ -608,7 +608,7 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
                 <condition else="-testclass @{testClass}" property="test.class.or.method" value="-methods @{testClass}.@{testMethod}">
                     <isset property="test.method"/>
                 </condition>
-                <condition else="-suitename Tuinbouw_v2 -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
+                <condition else="-suitename Tuinen -testname @{testClass} ${test.class.or.method}" property="testng.cmd.args" value="@{testClass}">
                     <matches pattern=".*\.xml" string="@{testClass}"/>
                 </condition>
                 <delete dir="${build.test.results.dir}" quiet="true"/>
@@ -1032,13 +1032,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.jaxb-api-2.2.7.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jboss-logging-3.1.0.GA.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jboss-transaction-api_1.1_spec-1.0.1.Final.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-client.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-common.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-container-servlet-core.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-container-servlet.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-guava-2.25.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-media-jaxb.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.jersey-server.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.json-simple-1.1-sources.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.json-simple-1.1.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.mysql-connector-java-5.1.20-bin.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
@@ -1049,6 +1042,13 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.slf4j-api-1.7.2.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.slf4j-jdk14-1.7.25.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.validation-api-1.1.0.Final.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-client.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-common.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-container-servlet-core.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-container-servlet.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-guava-2.25.1.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-media-jaxb.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.jersey-server.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1100,13 +1100,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.jaxb-api-2.2.7.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jboss-logging-3.1.0.GA.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.jboss-transaction-api_1.1_spec-1.0.1.Final.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-client.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-common.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-container-servlet-core.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-container-servlet.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-guava-2.25.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-media-jaxb.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.jersey-server.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.json-simple-1.1-sources.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.json-simple-1.1.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.mysql-connector-java-5.1.20-bin.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
@@ -1117,6 +1110,13 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.slf4j-api-1.7.2.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.slf4j-jdk14-1.7.25.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.validation-api-1.1.0.Final.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-client.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-common.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-container-servlet-core.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-container-servlet.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-guava-2.25.1.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-media-jaxb.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.jersey-server.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>

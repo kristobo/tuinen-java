@@ -255,7 +255,8 @@ public class DbWerknemerOpdrachtTaakDao implements ICRUD {
                         + "LEFT OUTER JOIN vooruitgang as v on "
                         + "ot.VooruitgangID = v.ID "
                         + "WHERE wot.WerknemerID = :userId "
-                        + "AND NOW() BETWEEN o.startdatum AND o.einddatum "
+                     // + "AND NOW() BETWEEN o.startdatum AND o.einddatum "
+                        + "AND DATE(wot.Beginuur) = DATE(ADDDATE(NOW(), INTERVAL 8 HOUR)) "
                         + "ORDER BY taakNaam";
  
 		Session session = HibernateUtil.openSession();

@@ -49,9 +49,6 @@ public class PersoneelDaoAdapter implements ICRUD{
 		System.out.println(TAG + "De nieuwe id = " + nieuweId);
 		personeel.setPersoonId(nieuweId);
 		
-		
-		
-		
 		dbgebruiker.setId(nieuweId);
 		dbgebruiker.setEmail(personeel.getEmail());
 		dbgebruiker.setBevoegdheidId(2);
