@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import static java.util.Calendar.HOUR;
 import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -159,8 +160,8 @@ public class TaskService {
         int endTime_int = track.get("endTime").getAsInt();
         
         // Convert date to correct format
-        Date startTime = new Date(startTime_int*1000L);
-        Date endTime = new Date(endTime_int*1000L);
+        Date startTime = new Date(startTime_int*1000L+2 * HOUR);
+        Date endTime = new Date(endTime_int*1000L+2 * HOUR);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String startTime_s = sdf.format(startTime);
         String endTime_s = sdf.format(endTime);
