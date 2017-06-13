@@ -10,10 +10,7 @@
                 <property name="connection.url">jdbc:mysql://mysql3.gear.host/eindnaam</property>
                 <property name="connection.username">eindnaam</property>
                 <property name="connection.password">Wu84p_EDDfc?</property>
-                
-                <property name="connection.autoReconnect">true</property>
-                <property name="connection.autoReconnectForPools">true</property>
-
+             
                <!--
                 <property name="connection.url">jdbc:mysql://localhost:3306/db_eindwerk</property>
 		<property name="connection.username">root</property>
@@ -25,14 +22,7 @@
 		<property name="format_sql">true</property>
 		<property name="hbm2dll.auto">create</property>
                 
-                <property name="c3p0.acquire_increment">1</property>  
-    		<property name="hibernate.c3p0.min_size">5</property>
-                <property name="hibernate.c3p0.max_size">20</property>
-                <property name="hibernate.c3p0.timeout">300</property>
-                <property name="hibernate.c3p0.max_statements">50</property>
-             
-                
-		<mapping resource="be/miras/programs/frederik/dbo/DbMateriaal.hbm.xml"></mapping>
+                <mapping resource="be/miras/programs/frederik/dbo/DbMateriaal.hbm.xml"></mapping>
 		<mapping class="be.miras.programs.frederik.dbo.DbMateriaal"></mapping>
 		<mapping resource="be/miras/programs/frederik/dbo/DbTypeMateriaal.hbm.xml"></mapping>
 		<mapping class="be.miras.programs.frederik.dbo.DbTypeMateriaal"></mapping>

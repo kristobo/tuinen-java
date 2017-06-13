@@ -54,12 +54,8 @@ public class RestAuthFilter implements ContainerRequestFilter {
         if(RestUtil.isExistingUser(username,password)){
             //Add id in header to pass to endpoint
             requestContext.getHeaders().add("X-Authentication-decrypted", usernameAndPassword);
-            
             return;
         }
-        
         requestContext.abortWith(ACCESS_DENIED);
-
     }
-    
 }

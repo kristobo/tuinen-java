@@ -98,7 +98,6 @@ public class MaterialService {
         MateriaalDaoAdapter mda = new MateriaalDaoAdapter();
         List<Materiaal>  dbOpdrachtMateriaalLijst = mda.leesOpdrachtMateriaal(id);
 
-          
         if(dbOpdrachtMateriaalLijst.size() > 0){
             Gson gson = new Gson();
             // Convert your list to json.

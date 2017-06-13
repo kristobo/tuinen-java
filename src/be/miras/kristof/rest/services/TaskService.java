@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import static java.util.Calendar.HOUR;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -156,12 +157,17 @@ public class TaskService {
         // Get fields from json
         int taskId = track.get("taskId").getAsInt();
         int opdrachtId = track.get("opdrachtId").getAsInt();
-        int startTime_int = track.get("startTime").getAsInt();
-        int endTime_int = track.get("endTime").getAsInt();
+        long startTime_int = track.get("startTime").getAsLong();
+        long endTime_int = track.get("endTime").getAsLong();
         
         // Convert date to correct format
-        Date startTime = new Date(startTime_int*1000L+2 * HOUR);
-        Date endTime = new Date(endTime_int*1000L+2 * HOUR);
+        Date startTime = new Date(startTime_int);
+        Date endTime = new Date(endTime_int);
+        
+        startTime = new Date(startTime.getTime() + TimeUnit.HOURS.toMillis(6));
+        endTime = new Date(endTime.getTime() + TimeUnit.HOURS.toMillis(6));
+       
+        System.out.print(startTime_int);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String startTime_s = sdf.format(startTime);
         String endTime_s = sdf.format(endTime);

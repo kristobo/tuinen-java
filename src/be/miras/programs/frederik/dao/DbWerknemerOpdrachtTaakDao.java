@@ -282,6 +282,4 @@ public class DbWerknemerOpdrachtTaakDao implements ICRUD {
 		List<Object> objectLijst = new ArrayList<Object>(lijst);
 		return objectLijst;
 	}
-
-
 }
