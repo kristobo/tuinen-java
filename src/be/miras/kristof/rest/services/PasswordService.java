@@ -38,7 +38,7 @@ public class PasswordService {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response authenticateUser(@FormParam("username") String username,
                                      @FormParam("password") String password,
-                                     @FormParam("passnew") String passnew) {
+                                     @FormParam("pass_new") String pass_new) {
 
         if(!RestUtil.isExistingUser(username, password)){
             return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde gebruikersnaam of passwoord").build();
@@ -47,7 +47,7 @@ public class PasswordService {
         DbGebruikerDao dgd = new DbGebruikerDao();
         DbGebruiker dg = dgd.getGebruiker(username);
 
-        dg.setWachtwoord(passnew);
+        dg.setWachtwoord(pass_new);
         dgd.wijzig(dg);
 
         Gson gson = new Gson();
