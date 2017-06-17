@@ -6,8 +6,13 @@
 package be.miras.kristof.rest.services;
 
 import be.miras.kristof.rest.app.RestUtil;
+import be.miras.programs.frederik.dao.DbGebruikerDao;
+import be.miras.programs.frederik.dbo.DbGebruiker;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -18,9 +23,9 @@ import javax.ws.rs.core.Response;
  *
  * @author kbo
  */
-@Path("/login")
+@Path("/password")
 
-public class LoginService {
+public class PasswordService {
     
     /**
      * Validate login and return token.
@@ -33,25 +38,18 @@ public class LoginService {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response authenticateUser(@FormParam("username") String username,
                                      @FormParam("password") String password) {
+    
+        DbGebruikerDao dgd = new DbGebruikerDao();
+        DbGebruiker dg = dgd.getGebruiker(username);
         
-        if(RestUtil.isExistingUser(username, password)){
-            
-            // Check if correct rol
-            if (RestUtil.hasWerknemerRol(username, password)){
-                 
-                // Issue a token for the user
-                String token = RestUtil.generateToken(username, password);
-
-                // Return the token on the response
-                return Response.ok(token).build();
-
-            }
-            
-            return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde rol").build();
-           
-        }
-
-        return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde gebruikersnaam of passwoord").build();
+        dg.setWachtwoord(password);
+        dgd.wijzig(dg);
+                                     
+        Gson gson = new Gson();
+        String output = gson.toJson("POST: Password changed.");
+        return Response.status(200).entity(output).build();
+    
+    
     }
     
 }

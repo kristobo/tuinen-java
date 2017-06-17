@@ -17,10 +17,8 @@ import be.miras.programs.frederik.dbo.DbVooruitgang;
 import be.miras.programs.frederik.model.Taak;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import static java.util.Calendar.HOUR;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,7 +31,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.glassfish.jersey.internal.util.Base64;
 
 /**
  *

@@ -7,7 +7,6 @@ package be.miras.kristof.rest.services;
 
 import be.miras.kristof.rest.app.Secured;
 import be.miras.programs.frederik.dao.DbKlantDao;
-import be.miras.programs.frederik.dao.DbWerknemerOpdrachtTaakDao;
 import be.miras.programs.frederik.dbo.DbKlant;
 import com.google.gson.Gson;
 import java.util.List;

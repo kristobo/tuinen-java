@@ -5,34 +5,16 @@
  */
 package be.miras.kristof.rest.services;
 
-import be.miras.kristof.rest.app.RestUtil;
 import be.miras.kristof.rest.app.Secured;
-import be.miras.programs.frederik.dao.DbGebruikerDao;
-import be.miras.programs.frederik.dao.DbKlantAdresDao;
-import be.miras.programs.frederik.dao.DbOpdrachtDao;
 import be.miras.programs.frederik.dao.DbOpdrachtTaakDao;
-import be.miras.programs.frederik.dao.DbTaakDao;
 import be.miras.programs.frederik.dao.DbVooruitgangDao;
-import be.miras.programs.frederik.dao.DbWerknemerOpdrachtTaakDao;
-import be.miras.programs.frederik.dao.adapter.AdresAdapter;
-import be.miras.programs.frederik.dao.adapter.TaakDaoAdapter;
-import be.miras.programs.frederik.dbo.DbGebruiker;
-import be.miras.programs.frederik.dbo.DbOpdracht;
 import be.miras.programs.frederik.dbo.DbOpdrachtTaak;
-import be.miras.programs.frederik.dbo.DbTaak;
 import be.miras.programs.frederik.dbo.DbVooruitgang;
-import be.miras.programs.frederik.model.Adres;
-import be.miras.programs.frederik.model.Taak;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import java.util.Iterator;
-import java.util.List;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
