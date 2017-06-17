@@ -3,18 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/services/MaterialService.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/programs/frederik/dao/HibernateUtil.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/app/RestAuthFilter.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/services/AddressService.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/hibernate.cfg.xml</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/services/JobService.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/programs/frederik/dao/DbWerknemerDao.java</file>
             <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/programs/frederik/dao/DbGebruikerDao.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/services/CustomerService.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/programs/frederik/dao/DbWerkgeverDao.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/app/Secured.java</file>
-            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/services/TaskService.java</file>
+            <file>file:/Users/kbo/dev_java/git/Tuinen/src/be/miras/kristof/rest/services/PasswordService.java</file>
         </group>
     </open-files>
 </project-private>

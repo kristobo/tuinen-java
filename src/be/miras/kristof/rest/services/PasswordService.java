@@ -37,19 +37,23 @@ public class PasswordService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response authenticateUser(@FormParam("username") String username,
-                                     @FormParam("password") String password) {
-    
+                                     @FormParam("password") String password,
+                                     @FormParam("passnew") String passnew) {
+
+        if(!RestUtil.isExistingUser(username, password)){
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Verkeerde gebruikersnaam of passwoord").build();
+        }
+        
         DbGebruikerDao dgd = new DbGebruikerDao();
         DbGebruiker dg = dgd.getGebruiker(username);
-        
-        dg.setWachtwoord(password);
+
+        dg.setWachtwoord(passnew);
         dgd.wijzig(dg);
-                                     
+
         Gson gson = new Gson();
         String output = gson.toJson("POST: Password changed.");
         return Response.status(200).entity(output).build();
-    
-    
+       
     }
     
 }
